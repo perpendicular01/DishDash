@@ -1,0 +1,100 @@
+{
+  "hash": "4df031b1",
+  "configHash": "66d251af",
+  "lockfileHash": "f28d94af",
+  "browserHash": "d3a2d243",
+  "optimized": {
+    "@smastrom/react-rating": {
+      "src": "../../node_modules/@smastrom/react-rating/dist/index.mjs",
+      "file": "@smastrom_react-rating.js",
+      "fileHash": "a9cd2ece",
+      "needsInterop": false
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "20acec49",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "f2a9f605",
+      "needsInterop": true
+    },
+    "react-helmet-async": {
+      "src": "../../node_modules/react-helmet-async/lib/index.esm.js",
+      "file": "react-helmet-async.js",
+      "fileHash": "232edf75",
+      "needsInterop": false
+    },
+    "react-icons/fa": {
+      "src": "../../node_modules/react-icons/fa/index.mjs",
+      "file": "react-icons_fa.js",
+      "fileHash": "c1a0ddf5",
+      "needsInterop": false
+    },
+    "react-icons/io": {
+      "src": "../../node_modules/react-icons/io/index.mjs",
+      "file": "react-icons_io.js",
+      "fileHash": "c7c9adad",
+      "needsInterop": false
+    },
+    "react-parallax": {
+      "src": "../../node_modules/react-parallax/lib/index.js",
+      "file": "react-parallax.js",
+      "fileHash": "1daa9fe8",
+      "needsInterop": true
+    },
+    "react-responsive-carousel": {
+      "src": "../../node_modules/react-responsive-carousel/lib/js/index.js",
+      "file": "react-responsive-carousel.js",
+      "fileHash": "dc3a799d",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "8e69321a",
+      "needsInterop": false
+    },
+    "react-tabs": {
+      "src": "../../node_modules/react-tabs/esm/index.js",
+      "file": "react-tabs.js",
+      "fileHash": "1d82c968",
+      "needsInterop": false
+    },
+    "swiper/modules": {
+      "src": "../../node_modules/swiper/modules/index.mjs",
+      "file": "swiper_modules.js",
+      "fileHash": "ec380d1d",
+      "needsInterop": false
+    },
+    "swiper/react": {
+      "src": "../../node_modules/swiper/swiper-react.mjs",
+      "file": "swiper_react.js",
+      "fileHash": "17adb861",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-XLOWEJT4": {
+      "file": "chunk-XLOWEJT4.js"
+    },
+    "chunk-Z5MTBTMG": {
+      "file": "chunk-Z5MTBTMG.js"
+    },
+    "chunk-JQEZBOMU": {
+      "file": "chunk-JQEZBOMU.js"
+    },
+    "chunk-DBUGNT2R": {
+      "file": "chunk-DBUGNT2R.js"
+    },
+    "chunk-VUPZMC2T": {
+      "file": "chunk-VUPZMC2T.js"
+    },
+    "chunk-EQCVQC35": {
+      "file": "chunk-EQCVQC35.js"
+    }
+  }
+}
