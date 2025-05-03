@@ -1,0 +1,26 @@
+.swiper {
+    padding-bottom: 40px; /* creates space for pagination */
+  }
+  
+  .swiper-pagination {
+    bottom: 0px !important; /* optional: adjust if needed */
+    text-align: center;
+  }
+  
+  .swiper-pagination-bullet {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 15px;
+    color: #000;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.2);
+    margin: 0 5px; /* spacing between bullets */
+  }
+  
+  .swiper-pagination-bullet-active {
+    color: #fff;
+    background: #007aff;
+  }
+  

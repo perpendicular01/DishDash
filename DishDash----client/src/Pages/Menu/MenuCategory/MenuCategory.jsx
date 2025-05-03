@@ -20,11 +20,11 @@ const MenuCategory = ({ items, image, title, description }) => {
                 }
             </div>
 
-            {/* <Link to={`/order/${title}`}> */}
+            <Link to={`/order/${title}`}>
                 <div className='text-center mb-14'>
                     <button className="btn btn-outline border-0 border-b-4 px-12 uppercase">Order Your Favorite Food</button>
                 </div>
-            {/* </Link> */}
+            </Link>
 
         </div>
     );

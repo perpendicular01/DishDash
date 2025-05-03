@@ -2,16 +2,55 @@ import React from 'react';
 import MenuCard from '../../Shared/Card/MenuCard';
 import FoodCard from '../../../components/Card/FoodCard';
 
-const OrderTab = ({items}) => {
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './ordertab.css'
+
+// import required modules
+import { Pagination } from 'swiper/modules';
+
+const OrderTab = ({ items }) => {
+
+    const pagination = {
+        clickable: true,
+        renderBullet: function (index, className) {
+            return '<span class="' + className + '">' + (index + 1) + '</span>';
+        },
+    };
+
+    const groupedItems = [];
+    for (let i = 0; i < items.length; i += 3) {
+        groupedItems.push(items.slice(i, i + 3));
+    }
+
+
     return (
-        <div>
-            <div className='grid grid-cols-1 md:grid-cols-3 gap-5 mb-16 mt-8'>
+        <div className='pb-20'>
+            <Swiper
+                pagination={pagination}
+                modules={[Pagination]}
+                className="mySwiper mt-5 mb-5"
+            >
+
+
                 {
-                    items.map(item => <FoodCard
-                        key={item._id} item={item}
-                    ></FoodCard>)
+                    groupedItems.map((group, index) => (
+                        <SwiperSlide key={index}>
+                            <div className='grid md:grid-cols-3 gap-5'>
+                                {group.map(item => (
+                                    <FoodCard key={item._id} item={item} />
+                                ))}
+                            </div>
+                        </SwiperSlide>
+                    ))
                 }
-            </div>
+
+
+            </Swiper>
+
 
         </div>
     );

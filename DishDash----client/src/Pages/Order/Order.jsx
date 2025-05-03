@@ -8,10 +8,18 @@ import Cover from '../Shared/Cover/Cover';
 import useMenu from '../../hooks/useMenu';
 import MenuCard from '../Shared/Card/MenuCard';
 import OrderTab from './OrderTab/OrderTab';
+import { useParams } from 'react-router-dom';
+
 
 const Order = () => {
-    const [tableIndex, setTableIndex] = useState(0);
+    const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks']
+    const {category} = useParams()
+
+    const intialIndex = categories.indexOf(category)
+    const [tableIndex, setTableIndex] = useState(intialIndex);
     const [menu] = useMenu();
+    
+    console.log(category)
 
     const dessert = menu.filter(item => item.category === 'dessert')
     const soup = menu.filter(item => item.category === 'soup')
