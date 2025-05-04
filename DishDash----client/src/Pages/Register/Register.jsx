@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import Swal from 'sweetalert2'
 
 import { FaEye, FaEyeSlash, FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Lottie from "lottie-react";
 import banner from '../../assets/background.png';
 import animation from '../../assets/login/register.json';
@@ -16,6 +16,12 @@ const Register = () => {
 
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const [showPassword, setShowPassword] = useState(false);
+
+
+    const navigate = useNavigate()
+    const location = useLocation()
+    // console.log(location)
+    const from = location.state?.from?.pathname || '/'
 
     const {
         register,
@@ -41,6 +47,7 @@ const Register = () => {
                         });
 
                         reset();
+                        navigate(from , {replace: true})
                     })
                     .catch((error) => {
                         console.log(error)

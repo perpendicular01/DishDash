@@ -1,9 +1,16 @@
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import { IoIosMenu } from "react-icons/io";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
+
     const path = useLocation().pathname;
+    // console.log(path)
+    const navigate = useNavigate()
+    
 
     // links
     const links = <>
@@ -50,6 +57,16 @@ const Navbar = () => {
 
     </>
 
+const handleSignOut = async (e) => {
+    e.preventDefault();
+
+    try {
+        await logOut()
+        navigate('/login')
+    }
+    catch { /* empty */ }
+}
+
     return (
 
         <div className="navbar max-w-screen-xl fixed z-10 bg-black/35  flex justify-between items-center py-2 md:py-2 lg:py-3   text-white">
@@ -70,34 +87,40 @@ const Navbar = () => {
 
 
             <div className="flex items-center gap-2 md:gap-8 ">
-                {/* <div className="flex items-center gap-2 md:gap-4 ">
-                                <div>
-                                    <img className="rounded-full w-9 h-9 lg:w-10 lg:h-10" src={user.photoURL} alt="" />
-                                </div>
-                                <div>
-                                    <Link>
-                                        <button
-                                            onClick={handleSignOut}
-                                            className={`px-2 md:px-4 py-2 rounded-lg text-sm md:text-base font-medium ${path === '/auth/login'
-                                                    ? 'text-white bg-[#6C5B1D]'
-                                                    : 'bg-[#BAC2CA] text-black hover:bg-gray-700 hover:text-white'
-                                                }`}
-                                        >
-                                            Logout
-                                        </button>
-                                    </Link>
-                                </div>
-
-                            </div>
-                            : */}
+               
+                
                 <div className="hidden list-none md:flex items-center gap-5 text-sm ">
                     {links}
                 </div>
+                {
+                    user ?
+                    <div className="flex items-center gap-2 md:gap-4 ">
+                    <div>
+                        <img className="rounded-full w-9 h-9 lg:w-10 lg:h-10" src={user.photoURL} alt="" />
+                    </div>
+                    <div>
+                        <Link>
+                            <button
+                                onClick={handleSignOut}
+                                className={`px-2 md:px-4 py-2 rounded-lg text-sm md:text-base font-medium ${path === 'login'
+                                    ? 'text-white bg-[#6C5B1D]'
+                                    : 'bg-[#BAC2CA] text-black hover:bg-gray-700 hover:text-white'
+                                    }`}
+                            >
+                                Logout
+                            </button>
+                        </Link>
+                    </div>
+
+                </div>  
+                :
                 <div className="flex items-center gap-2 md:gap-5 ">
-                    <Link to="login"><button className={`px-2 md:px-3 lg:px-4 py-1 lg:py-2 rounded-lg text-sm md:text-base  font-medium ${path === '/auth/login' ? "text-white bg-[#4B5563] hover:bg-gray-700" : "bg-[#BAC2CA] text-black"}`}>  Login </button></Link>
-                    <Link to="register">   <button className={`px-2 md:px-3 lg:px-4 py-1 lg:py-2 rounded-lg text-sm md:text-base font-medium ${path === '/auth/register' ? "text-white bg-[#4B5563] hover:bg-gray-700" : "bg-[#BAC2CA] text-black"}`}> Register </button></Link>
+                    <Link to="login"><button className={`px-2 md:px-3 lg:px-4 py-1 lg:py-2 rounded-lg text-sm md:text-base  font-medium ${path === 'login' ? "text-white bg-[#4B5563] hover:bg-gray-700" : "bg-[#BAC2CA] text-black"}`}>  Login </button></Link>
+                    <Link to="register">   <button className={`px-2 md:px-3 lg:px-4 py-1 lg:py-2 rounded-lg text-sm md:text-base font-medium ${path === 'register' ? "text-white bg-[#4B5563] hover:bg-gray-700" : "bg-[#BAC2CA] text-black"}`}> Register </button></Link>
                 </div>
-                {/* } */}
+                }
+                
+               
             </div>
         </div>
 
