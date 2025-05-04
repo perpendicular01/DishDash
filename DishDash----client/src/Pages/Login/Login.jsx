@@ -18,6 +18,16 @@ const Login = () => {
         loadCaptchaEnginge(6);
       }, []);
 
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        console.log(email, password)
+    }
+
     return (
         <div
             className="min-h-screen flex items-center justify-center"
@@ -37,13 +47,14 @@ const Login = () => {
                 <div className="w-full md:w-1/2 px-4">
                     <p className="text-black font-semibold text-2xl pb-5 text-center">Login</p>
 
-                    <form className="w-full max-w-sm mx-auto">
+                    <form onSubmit={handleLogin} className="w-full max-w-sm mx-auto">
                         <div className="mb-4">
                             <label className="label">
                                 <span className="label-text font-semibold text-black mb-1">Email</span>
                             </label>
                             <input
                                 type="email"
+                                name="email"
                                 placeholder="Enter your email"
                                 className="input input-bordered w-full"
                                 required
@@ -56,6 +67,7 @@ const Login = () => {
                             </label>
                             <input
                                 type="password"
+                                name="password"
                                 placeholder="Enter your password"
                                 className="input input-bordered w-full"
                                 required
