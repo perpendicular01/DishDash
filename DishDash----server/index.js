@@ -28,6 +28,7 @@ async function run() {
     const database = client.db('DishDash')
     const menuCollection = database.collection('menu')
     const reviewsCollection = database.collection('reviews')
+    const cartCollection = database.collection('carts')
 
 
     app.get('/menu', async(req, res) => {
@@ -38,6 +39,12 @@ async function run() {
     app.get('/reviews', async(req, res) => {
         const result = await reviewsCollection.find().toArray();
         res.send(result);
+    })
+
+    app.post('/carts', async(req, res) => {
+        const cartItem = req.body;
+        const result = await cartCollection.insertOne(cartItem);
+        res.send(result)
     })
 
 

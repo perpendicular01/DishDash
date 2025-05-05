@@ -9,6 +9,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
 
+
 const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
@@ -64,7 +65,7 @@ const Login = () => {
 
     return (
         <div
-            className="min-h-screen flex items-center justify-center"
+            className="min-h-screen  flex items-center justify-center"
             style={{ backgroundImage: `url(${banner})` }}
         >
             <div className="   bg-center w-full flex flex-col md:flex-row items-center justify-center bg-black  rounded-lg shadow-[10px_10px_20px_rgba(0,0,0,0.9)] max-w-3xl lg:max-w-6xl p-8 "

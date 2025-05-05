@@ -8,6 +8,7 @@ import { router } from './Routes/Routes';
 import { HelmetProvider } from 'react-helmet-async';
 import AuthProvider from './providers/AuthProvider';
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
