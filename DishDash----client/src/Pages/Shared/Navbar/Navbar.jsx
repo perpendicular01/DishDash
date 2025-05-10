@@ -4,13 +4,16 @@ import { IoIosMenu } from "react-icons/io";
 import { useContext } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
 import { TiShoppingCart } from "react-icons/ti";
+import useCart from "../../../hooks/useCart";
 
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
 
     const path = useLocation().pathname;
     // console.log(path)
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    
+    const [cart] = useCart();
 
 
     // links
@@ -64,7 +67,7 @@ const Navbar = () => {
                         <TiShoppingCart></TiShoppingCart> 
                     </div>
                     <div className="absolute border font-medium text-sm ml-4 -mt-2 bg-red-300 text-black p-1 rounded-full "> 
-                        99
+                        +{cart.length}
                     </div>
                 </button>
             </NavLink>

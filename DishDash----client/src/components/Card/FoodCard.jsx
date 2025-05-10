@@ -4,7 +4,11 @@ import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
+import useAxioSecure from '../../hooks/useAxioSecure';
+import { toast } from 'react-toastify';
+import useCart from '../../hooks/useCart';
+
 
 const FoodCard = ({ item }) => {
     const { _id, image, price, name, recipe } = item
@@ -12,7 +16,11 @@ const FoodCard = ({ item }) => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    
+    const axioSecure = useAxioSecure();
+
+    const [, refetch] = useCart()
+
+
 
     const handleAddToCart = () => {
         if (user && user.email) {
@@ -24,17 +32,22 @@ const FoodCard = ({ item }) => {
                 price: price,
             }
 
-            axios.post('http://localhost:5000/', cartItem)
+            axioSecure.post('/carts', cartItem)
                 .then(res => {
                     console.log(res.data)
-                    if(res.data.insertedId){
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: `${name} added to cart`,
-                            showConfirmButton: false,
-                            timer: 1500
+                    if (res.data.insertedId) {
+                        toast.success(`${name} added to the cart`, {
+                            position: "top-right",
+                            autoClose: 5000,
+
+                            closeOnClick: false,
+
+                            theme: "dark",
+
                         });
+                        
+                        // cart a instant add korbe number
+                        refetch()
                     }
 
                 })
