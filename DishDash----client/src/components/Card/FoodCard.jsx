@@ -38,7 +38,7 @@ const FoodCard = ({ item }) => {
                     if (res.data.insertedId) {
                         toast.success(`${name} added to the cart`, {
                             position: "top-right",
-                            autoClose: 5000,
+                            autoClose: 2000,
 
                             closeOnClick: false,
 

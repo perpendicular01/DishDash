@@ -60,7 +60,7 @@ const Navbar = () => {
         </li>
         <li>
             <NavLink
-                to="/order/salad"
+                to="/dashboard/cart"
             >
                 <button className="border-y-amber-300 border-[1px] rounded-full p-2  bg-green-900 relative">
                     <div className="text-white text-2xl">
