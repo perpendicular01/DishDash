@@ -12,6 +12,9 @@ import PrivateRoute from "./PrivateRoute";
 import Contact from "../Pages/Contact/Contact";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../Pages/Dashboard/Cart/Cart";
+import Booking from "../Pages/Dashboard/Booking/Booking";
+import Payment from "../Pages/Dashboard/Payment/Payment";
+import Reservation from "../Pages/Dashboard/Reservation/Reservation";
 
 
 export const router = createBrowserRouter([
@@ -53,6 +56,18 @@ export const router = createBrowserRouter([
             {
                 path: 'cart',
                 element: <Cart></Cart>
+            },
+            {
+                path: 'booking',
+                element: <Booking></Booking>
+            },
+            {
+                path: 'payment',
+                element: <Payment></Payment>
+            },
+            {
+                path: 'reservation',
+                element: <Reservation></Reservation>
             }
         ]
     }
