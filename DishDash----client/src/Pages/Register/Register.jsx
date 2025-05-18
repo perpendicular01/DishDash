@@ -10,12 +10,16 @@ import animation from '../../assets/login/register.json';
 
 import { useForm } from "react-hook-form"
 import { AuthContext } from '../../providers/AuthProvider';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 
 const Register = () => {
 
     const { createUser, updateUserProfile } = useContext(AuthContext)
     const [showPassword, setShowPassword] = useState(false);
+
+    const axiosPublic = useAxiosPublic()
 
 
     const navigate = useNavigate()
@@ -39,15 +43,27 @@ const Register = () => {
                 console.log(loggedUser)
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
-                        console.log("profile updated")
-                        console.log(loggedUser)
-                        Swal.fire({
-                            title: "successfully registered",
-                            icon: "success"
-                        });
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email,
+                            firebaseUid: loggedUser.uid
+                        };
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log("profile updated")
+                                    console.log(loggedUser)
+                                    Swal.fire({
+                                        title: "successfully registered",
+                                        icon: "success"
+                                    });
 
-                        reset();
-                        navigate(from , {replace: true})
+                                    reset();
+                                    navigate(from, { replace: true })
+                                }
+
+                            })
+
                     })
                     .catch((error) => {
                         console.log(error)
@@ -178,17 +194,7 @@ const Register = () => {
 
                     <p className="text-[#444444] font-medium pt-3 text-center">Or sign up with</p>
 
-                    <div className="flex justify-center items-center gap-5 py-2">
-                        <div className="border rounded-full p-2 cursor-pointer">
-                            <FaFacebookF />
-                        </div>
-                        <div className="border rounded-full p-2 cursor-pointer">
-                            <FaGoogle />
-                        </div>
-                        <div className="border rounded-full p-2 cursor-pointer">
-                            <FaGithub />
-                        </div>
-                    </div>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>

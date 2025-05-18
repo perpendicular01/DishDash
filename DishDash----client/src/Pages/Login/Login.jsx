@@ -8,6 +8,8 @@ import { useEffect } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 
 const Login = () => {
@@ -20,6 +22,8 @@ const Login = () => {
     const location = useLocation()
     // console.log(location)
     const from = location.state?.from?.pathname || '/'
+
+   
 
 
     // for captcha
@@ -156,17 +160,7 @@ const Login = () => {
 
                     <p className="text-[#444444] font-medium pt-3 text-center">Or sign in with</p>
 
-                    <div className="flex justify-center items-center gap-5 py-2">
-                        <div className="border rounded-full p-2 cursor-pointer">
-                            <FaFacebookF />
-                        </div>
-                        <div className="border rounded-full p-2 cursor-pointer">
-                            <FaGoogle />
-                        </div>
-                        <div className="border rounded-full p-2 cursor-pointer">
-                            <FaGithub />
-                        </div>
-                    </div>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
