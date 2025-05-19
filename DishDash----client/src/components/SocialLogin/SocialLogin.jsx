@@ -22,6 +22,7 @@ const SocialLogin = () => {
                 const userInfo = {
                     email: result.user?.email,
                     name: result.user?.displayName,
+                    role: "user",
                     firebaseUid: result.user?.uid
                 }
 

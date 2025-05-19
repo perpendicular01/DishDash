@@ -1,6 +1,7 @@
-import {  createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { createUserWithEmailAndPassword, deleteUser, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 
 
@@ -9,8 +10,9 @@ import { auth } from "../firebase/firebase.config";
 export const AuthContext = createContext(null);
 
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const axiosPublic = useAxiosPublic()
     const [loading, setLoading] = useState(true)
 
     const createUser = (email, password) => {
@@ -33,8 +35,8 @@ const AuthProvider = ({children}) => {
         setLoading(true);
         return deleteUser(auth)
     }
-    
-    
+
+
     const logOut = () => {
         setLoading(true)
         return signOut(auth);
@@ -42,16 +44,36 @@ const AuthProvider = ({children}) => {
 
     const updateUserProfile = (name, photoUrl) => {
         return updateProfile(auth.currentUser, {
-            displayName : name,
+            displayName: name,
             photoURL: photoUrl
         })
 
     }
 
-    useEffect( () => {
+    useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currUser) => {
             setUser(currUser);
             setLoading(false)
+
+            if(currUser?.email) {
+                const user = { email: currUser?.email }
+
+                axiosPublic.post('/jwt', user, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data)
+                        // console.log('hello')
+                        setLoading(false)
+                    })
+            }
+            else {
+                axiosPublic.post('/logout', {}, {
+                    withCredentials: true
+                })
+                    .then(res => {
+                        console.log("logOut", res.data)
+                        setLoading(false)
+                    })
+            }
         })
         return () => {
             return unsubscribe();

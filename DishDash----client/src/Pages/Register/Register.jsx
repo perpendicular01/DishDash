@@ -46,6 +46,7 @@ const Register = () => {
                         const userInfo = {
                             name: data.name,
                             email: data.email,
+                            role: "user",
                             firebaseUid: loggedUser.uid
                         };
                         axiosPublic.post('/users', userInfo)

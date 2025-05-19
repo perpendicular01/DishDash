@@ -8,11 +8,14 @@ import logo from '../assets/logo.png'
 import useCart from '../hooks/useCart';
 import { TfiMenuAlt } from 'react-icons/tfi';
 import { BiSolidFoodMenu } from 'react-icons/bi';
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
     const [cart] = useCart()
 
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
+    
+    console.log(isAdmin)
 
     return (
         <div>
