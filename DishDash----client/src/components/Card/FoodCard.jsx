@@ -78,7 +78,7 @@ const FoodCard = ({ item }) => {
                 <img
                     src={image}
                     alt=""
-                    className="rounded-xl" />
+                    className="rounded-xl w-85 h-65" />
             </figure>
             <p className='absolute right-0 mr-5 mt-3 rounded-md text-white bg-black px-2 py-1'>
                 ${price}

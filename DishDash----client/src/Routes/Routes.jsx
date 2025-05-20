@@ -17,6 +17,9 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
 import Reservation from "../Pages/Dashboard/Reservation/Reservation";
 import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute";
+import AddItems from "../Pages/Dashboard/AddItems/AddItems";
+import ManageItems from "../Pages/Dashboard/ManageItems/ManageItems";
+import ManageBooking from "../Pages/Dashboard/ManageBooking/ManageBooking";
 
 
 export const router = createBrowserRouter([
@@ -76,6 +79,18 @@ export const router = createBrowserRouter([
             {
                 path: 'allUsers',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+            },
+            {
+                path: 'addItems',
+                element: <AdminRoute> <AddItems></AddItems></AdminRoute>
+            },
+            {
+                path: 'mangeItems',
+                element: <AdminRoute> <ManageItems></ManageItems></AdminRoute>
+            },
+            {
+                path: 'manageBookings',
+                element: <AdminRoute> <ManageBooking></ManageBooking></AdminRoute>
             }
 
 
