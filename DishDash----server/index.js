@@ -193,13 +193,66 @@ async function run() {
       res.send(result);
     })
 
-    app.post('/menu', async (req, res) => {
+    app.get('/menu/:id', async (req, res) => {
+      const id = req.params.id;
+    
+      let result = null;
+    
+      // Try ObjectId
+      try {
+        result = await menuCollection.findOne({ _id: new ObjectId(id) });
+      } catch (err) {
+        console.log("Invalid ObjectId:", err.message);
+      }
+   
+      // Fallback if _id was stored as string
+      if (!result) {
+        result = await menuCollection.findOne({ _id: id });
+      }
+    
+     
+      res.send(result);
+    });
+
+    app.post('/menu', verifyToken, verifyAdmin, async (req, res) => {
       const menuItem = req.body;
       const result = await menuCollection.insertOne(menuItem);
       res.send(result)
     })
 
-    app.delete('/menu/:id', async (req, res) => {
+    app.patch('/menu/:id', verifyToken, verifyAdmin, async (req, res) => {
+      const id = req.params.id;
+      const updatedItem = req.body;
+    
+      const updateDoc = {
+        $set: {
+          name: updatedItem.name,
+          recipe: updatedItem.recipe,
+          image: updatedItem.image,
+          category: updatedItem.category,
+          price: updatedItem.price
+        }
+      };
+    
+      // Try updating with ObjectId
+      let result = await menuCollection.updateOne(
+        { _id: new ObjectId(id) },
+        updateDoc
+      );
+      console.log(result)
+      // If no match, try again using string _id
+      if (result.modifiedCount === 0) {
+        result = await menuCollection.updateOne(
+          { _id: id },
+          updateDoc
+        );
+      }
+      console.log(result)
+      res.send(result);
+    });
+    
+
+    app.delete('/menu/:id', verifyToken, verifyAdmin, async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) }
       const result = await menuCollection.deleteOne(query);

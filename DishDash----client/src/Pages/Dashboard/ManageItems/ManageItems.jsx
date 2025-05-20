@@ -4,12 +4,13 @@ import Swal from "sweetalert2";
 import useAxioSecure from "../../../hooks/useAxioSecure";
 import useMenu from "../../../hooks/useMenu";
 import { FaEdit, FaRegEdit } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ManageItems = () => {
     const axioSecure = useAxioSecure()
-    const [menu] = useMenu()
+    const [menu, , refetch] = useMenu()
 
-    const handleDelete = id => {
+    const handleDelete = item => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -20,15 +21,19 @@ const ManageItems = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axioSecure.delete(`menu/${id}`)
+                axioSecure.delete(`menu/${item._id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
-                            Swal.fire({
-                                title: "Deleted!",
-                                text: "Item has been deleted.",
-                                icon: "success"
-                            });
                             refetch();
+
+                            Swal.fire({
+                                position: "bottom-end",
+                                icon: "success",
+                                title: `${item.name} has been deleted.`,
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+
 
                         }
                     })
@@ -51,7 +56,7 @@ const ManageItems = () => {
             <div className="overflow-x-auto w-[80%]  mx-auto bg-white p-10 mb-10 ">
                 <div className="flex justify-between mb-7 ">
                     <h2 className="font-bold text-2xl"> Total Items: <span className="text-red-900"> {menu.length}</span> </h2>
-                    
+
 
                 </div>
                 <table className="table ">
@@ -92,15 +97,17 @@ const ManageItems = () => {
                                     <h2 className="ml-1">{item.price}</h2>
                                 </td>
                                 <th>
-                                    <button
-                                        onClick={() => handleDelete(item._id)}
-                                        className=" btn px-2 py-3 text-xl bg-[#D1A054] text-white rounded-md   ">
-                                        <FaEdit/>
-                                    </button>
+                                    <Link to={`/dashboard/updateItem/${item._id}`}>
+
+                                        <button
+                                            className=" btn px-2 py-3 text-xl bg-[#D1A054] text-white rounded-md   ">
+                                            <FaEdit />
+                                        </button>
+                                    </Link>
                                 </th>
                                 <th>
                                     <button
-                                        onClick={() => handleDelete(item._id)}
+                                        onClick={() => handleDelete(item)}
                                         className=" btn px-1 py-2 text-lg bg-red-700 text-white rounded-md  ml-3 ">
                                         <RiDeleteBin6Line />
                                     </button>
